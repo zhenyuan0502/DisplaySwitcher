@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DisplaySwitcher (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "DisplaySwitcher (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
