@@ -8,7 +8,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="stackPanel">
+        <Button x:Name="pinTaskBar" Style="{StaticResource AccentButtonStyle}" Margin="5" Width="{Binding ActualWidth, ElementName=stackPanel}" Click="PinTaskBar_Click">Pin Taskbar</Button>
+        <Button x:Name="firstScreen" Style="{StaticResource AccentButtonStyle}" Margin="5" Width="{Binding ActualWidth, ElementName=stackPanel}" Click="FirstScreen_Click">First Screen</Button>
+        <Button x:Name="secondScreen" Style="{StaticResource AccentButtonStyle}" Margin="5" Width="{Binding ActualWidth, ElementName=stackPanel}" Click="SecondScreen_Click">Second Screen</Button>
+        <Button x:Name="duplicateScreen" Style="{StaticResource AccentButtonStyle}" Margin="5" Width="{Binding ActualWidth, ElementName=stackPanel}" Click="DuplicateScreen_Click">Duplicate Screen</Button>
+        <Button x:Name="extendScreen" Style="{StaticResource AccentButtonStyle}" Margin="5" Width="{Binding ActualWidth, ElementName=stackPanel}" Click="ExtendScreen_Click">Extend Screen</Button>
     </StackPanel>
+    
 </Window>

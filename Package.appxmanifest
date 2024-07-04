@@ -15,7 +15,7 @@
   <mp:PhoneIdentity PhoneProductId="6ed443f9-d39c-45ee-b743-6be9610d50d6" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>DisplaySwitcher</DisplayName>
+    <DisplayName>Display Switcher</DisplayName>
     <PublisherDisplayName>Heisy</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
