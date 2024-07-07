@@ -1,1 +1,1 @@
-# DisplaySwitcher
+# Display Switcher

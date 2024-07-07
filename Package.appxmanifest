@@ -34,8 +34,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="DisplaySwitcher"
-        Description="DisplaySwitcher"
+        DisplayName="Display Switcher"
+        Description="Display Switcher Extension help you run DisplaySwitch more convenience"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">

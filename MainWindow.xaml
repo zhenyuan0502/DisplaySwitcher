@@ -6,12 +6,10 @@
     xmlns:local="using:DisplaySwitcher"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Display Switcher Extension"
     mc:Ignorable="d">
 
     <StackPanel >
-        <Grid x:Name="AppTitleBar"  
-   Height="32">
+        <Grid x:Name="AppTitleBar" Height="32" Background="Transparent" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
                 <ColumnDefinition/>
@@ -21,68 +19,54 @@
         Grid.Column="1"
         HorizontalAlignment="Left"
         Width="16" Height="16"
+                   
         Margin="8,0,0,0"/>
+
             <TextBlock x:Name="titleBarTextBlock" 
-            Style="{StaticResource CaptionTextBlockStyle}"
-            Grid.Column="1"
-            VerticalAlignment="Center"
-            Margin="28,0,0,0"/>
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Text="{StaticResource AppTitleName}"
+                        Grid.Column="1"
+                        Margin="28,0,0,0"
+                        VerticalAlignment="Center"
+                        />
+
         </Grid>
 
-        <Grid Background="{ThemeResource HomePageBackgroundBrush}">
+        <ToggleSwitch AutomationProperties.Name="simple ToggleSwitch" x:Name="darkSwitch" 
+                      CornerRadius="2" VerticalAlignment="Top"
+                      OnContent="Dark Theme"
+                      OffContent="Light Theme"
+                      Margin="28,0,0,0"
+                      VerticalContentAlignment="Center" 
+                      Toggled="ToggleSwitch_Toggled" Loaded="ToggleSwitch_Loaded"/>
+        <Grid x:Name="Control1" Grid.Row="1" ColumnSpacing="30" RowSpacing="12"
+              Height="Auto"
+               VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Grid Margin="12">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <DropDownButton Content="Display" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="118" >
-                    <DropDownButton.Flyout>
-                        <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem Text="Default" Click="SwitchPresenter_OverLapped"/>
-                            <MenuFlyoutItem Text="Compact Overlay" Click="SwitchPresenter_CompOverlay"/>
-                            <MenuFlyoutItem Text="Fullscreen" Click="SwitchPresenter_Fullscreen"/>
-                        </MenuFlyout>
-                    </DropDownButton.Flyout>
-                </DropDownButton>
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                    <Setter Property="CornerRadius" Value="5" />
+                    <Setter Property="FontSize" Value="24" />
+                </Style>
+            </Grid.Resources>
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Please Pin App to TaskBar for using in different monitors" />
+            <Button x:Name="firstScreen" Grid.Row="1" Grid.Column="0"  Click="FirstScreen_Click" Content="First" />
+            <Button x:Name="secondScreen" Grid.Row="1" Grid.Column="1"  Click="SecondScreen_Click" Content="Second"/>
+            <Button x:Name="duplicateScreen" Grid.Row="2" Grid.Column="0"  Click="DuplicateScreen_Click" Content="Duplicate" />
+            <Button x:Name="extendScreen" Grid.Row="2" Grid.Column="1"  Click="ExtendScreen_Click" Content="Extend" />
 
-                <ToggleSwitch AutomationProperties.Name="simple ToggleSwitch" x:Name="darkSwitch" Grid.Column="1" CornerRadius="3" VerticalAlignment="Center"  HorizontalAlignment="Right" MinWidth="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Toggled="ToggleSwitch_Toggled" Loaded="ToggleSwitch_Loaded"/>
-            </Grid>
-
-
-            <Grid x:Name="Control1" Grid.Row="1" ColumnSpacing="30" RowSpacing="12"
-               VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <Grid.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="HorizontalAlignment" Value="Stretch" />
-                        <Setter Property="VerticalAlignment" Value="Stretch" />
-                        <Setter Property="CornerRadius" Value="5" />
-                        <Setter Property="Foreground" Value="White" />
-                        <Setter Property="FontSize" Value="24" />
-                    </Style>
-                </Grid.Resources>
-                <Button x:Name="pinTaskBar" Background="#C4425A" Grid.Row="0" Click="PinTaskBar_Click" Content="Pin Taskbar" />
-                <Button x:Name="firstScreen" Background="#D41DD8" Grid.Row="1" Grid.Column="0"  Click="FirstScreen_Click" Content="First" />
-                <Button x:Name="secondScreen" Background="#6A21A3" Grid.Row="1" Grid.Column="1"  Click="SecondScreen_Click" Content="Second"/>
-                <Button x:Name="duplicateScreen" Background="#473DB8" Grid.Row="2" Grid.Column="0"  Click="DuplicateScreen_Click" Content="Duplicate" />
-                <Button x:Name="extendScreen" Background="#26AAC7" Grid.Row="2" Grid.Column="1"  Click="ExtendScreen_Click" Content="Extend" />
-
-            </Grid>
         </Grid>
 
     </StackPanel>
