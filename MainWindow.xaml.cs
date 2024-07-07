@@ -103,9 +103,7 @@ namespace DisplaySwitcher
         [Display(Name = "Desktop Acrylic Base")]
         DesktopAcrylicBase,
         [Display(Name = "Desktop Acrylic Thin")]
-        DesktopAcrylicThin,
-        [Display(Name = "Default Color")]
-        DefaultColor,
+        DesktopAcrylicThin
     }
 
     /// <summary>
@@ -166,8 +164,7 @@ namespace DisplaySwitcher
             //       call RemoveSystemBackdropTarget() on the old controller and then setup the new
             //       controller, reusing any existing m_configurationSource and Activated/Closed
             //       event handlers.
-            m_currentBackdrop = BackdropType.DefaultColor;
-            tbChangeStatus.Text = "None (default theme color)";
+            m_currentBackdrop = BackdropType.Mica;
             tbChangeStatus.Text = "";
             if (m_micaController != null)
             {
@@ -238,11 +235,6 @@ namespace DisplaySwitcher
                     tbChangeStatus.Text = "Acrylic Thin isn't supported. Switching to default color.";
                 }
             }
-            if (type == BackdropType.DefaultColor)
-            {
-                SetConfigurationSourceTheme();
-            }
-
             // announce visual change to automation
             UIHelper.AnnounceActionForAccessibility(tbChangeStatus, $"Background changed to {tbChangeStatus.Text}", "BackgroundChangedNotificationActivityId");
         }
@@ -323,6 +315,19 @@ namespace DisplaySwitcher
                 m_appWindow.TitleBar.ButtonForegroundColor = Colors.Black;
                 m_appWindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
             }
+            else
+            {
+                if (App.Current.RequestedTheme == ApplicationTheme.Dark)
+                {
+                    m_appWindow.TitleBar.ButtonForegroundColor = Colors.White;
+                    m_appWindow.TitleBar.ButtonInactiveForegroundColor = Colors.White;
+                }
+                else
+                {
+                    m_appWindow.TitleBar.ButtonForegroundColor = Colors.Black;
+                    m_appWindow.TitleBar.ButtonInactiveForegroundColor = Colors.Black;
+                }
+            }
         }
 
         bool TrySetSystemBackdrop()
@@ -356,7 +361,8 @@ namespace DisplaySwitcher
 
         private void Window_Activated(object sender, WindowActivatedEventArgs args)
         {
-            m_configurationSource.IsInputActive = args.WindowActivationState != WindowActivationState.Deactivated;
+            if (m_configurationSource is not null)
+                m_configurationSource.IsInputActive = args.WindowActivationState != WindowActivationState.Deactivated;
         }
 
         private void Window_Closed(object sender, WindowEventArgs args)
