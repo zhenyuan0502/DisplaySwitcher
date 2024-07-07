@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel >
+        <StackPanel >
         <Grid x:Name="AppTitleBar" Height="32" Background="Transparent" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
@@ -22,23 +22,59 @@
                    
         Margin="8,0,0,0"/>
 
-            <TextBlock x:Name="titleBarTextBlock" 
+            <TextBlock  
                         Style="{StaticResource CaptionTextBlockStyle}"
                         Text="{StaticResource AppTitleName}"
                         Grid.Column="1"
                         Margin="28,0,0,0"
                         VerticalAlignment="Center"
                         />
-
         </Grid>
 
-        <ToggleSwitch AutomationProperties.Name="simple ToggleSwitch" x:Name="darkSwitch" 
-                      CornerRadius="2" VerticalAlignment="Top"
-                      OnContent="Dark Theme"
-                      OffContent="Light Theme"
-                      Margin="28,0,0,0"
-                      VerticalContentAlignment="Center" 
-                      Toggled="ToggleSwitch_Toggled" Loaded="ToggleSwitch_Loaded"/>
+        <Grid Margin="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+
+            <ComboBox 
+                        Grid.Column="0" Grid.Row="0"
+                      x:Name="cbBackdropTheme" PlaceholderText="Pick a Theme" Width="200"
+                      SelectedItem="{x:Bind CurrentBackdropTheme, Mode=TwoWay}"
+                        ItemsSource="{x:Bind BackdropThemes}" 
+                      >
+                <ComboBox.Resources>
+                    <local:EnumToDisplayNameConverter x:Key="EnumToDisplayNameConverter" />
+                </ComboBox.Resources>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource EnumToDisplayNameConverter}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            
+            <TextBlock 
+                x:Name="tbChangeStatus"
+                Margin="16,0,0,0"
+                Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                />
+
+            <ToggleSwitch AutomationProperties.Name="simple ToggleSwitch" x:Name="darkSwitch" 
+                CornerRadius="2" VerticalAlignment="Top"
+                Grid.Column="1" Grid.Row="0"
+                OnContent="Dark Theme"
+                OffContent="Light Theme"
+                VerticalContentAlignment="Center" 
+                Toggled="ToggleSwitch_Toggled" Loaded="ToggleSwitch_Loaded"/>
+        </Grid>
+
+      
         <Grid x:Name="Control1" Grid.Row="1" ColumnSpacing="30" RowSpacing="12"
               Height="Auto"
                VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -62,10 +98,10 @@
                 </Style>
             </Grid.Resources>
             <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Please Pin App to TaskBar for using in different monitors" />
-            <Button x:Name="firstScreen" Grid.Row="1" Grid.Column="0"  Click="FirstScreen_Click" Content="First" />
-            <Button x:Name="secondScreen" Grid.Row="1" Grid.Column="1"  Click="SecondScreen_Click" Content="Second"/>
-            <Button x:Name="duplicateScreen" Grid.Row="2" Grid.Column="0"  Click="DuplicateScreen_Click" Content="Duplicate" />
-            <Button x:Name="extendScreen" Grid.Row="2" Grid.Column="1"  Click="ExtendScreen_Click" Content="Extend" />
+            <Button Grid.Row="1" Grid.Column="0"  Click="FirstScreen_Click" Content="First" />
+            <Button Grid.Row="1" Grid.Column="1"  Click="SecondScreen_Click" Content="Second"/>
+            <Button Grid.Row="2" Grid.Column="0"  Click="DuplicateScreen_Click" Content="Duplicate" />
+            <Button Grid.Row="2" Grid.Column="1"  Click="ExtendScreen_Click" Content="Extend" />
 
         </Grid>
 

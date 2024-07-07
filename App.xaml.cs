@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -25,6 +26,8 @@ using Windows.UI.StartScreen;
 
 namespace DisplaySwitcher
 {
+   
+
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
