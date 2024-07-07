@@ -43,8 +43,12 @@ namespace DisplaySwitcher
             {
                 m_appWindow = GetAppWindowForCurrentWindow();
                 m_appWindow.SetIcon(@"Assets\TitlebarLogo.ico");
-                m_appWindow.Resize(new(480, 480));
+                m_appWindow.Resize(new(480, 320));
 
+                //https://learn.microsoft.com/en-us/windows/apps/develop/title-bar
+                var titleBar = m_appWindow.TitleBar;
+                titleBar.ExtendsContentIntoTitleBar = true;
+                titleBarTextBlock.Text = "Display Switcher Extension";
             }
         }
 

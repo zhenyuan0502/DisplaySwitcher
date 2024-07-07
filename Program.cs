@@ -50,20 +50,6 @@ namespace DisplaySwitcher
             return isRedirect;
         }
 
-        //// Do the redirection on another thread, and use a non-blocking
-        //// wait method to wait for the redirection to complete.
-        //public static void RedirectActivationTo(
-        //    AppActivationArguments args, AppInstance keyInstance)
-        //{
-        //    var redirectSemaphore = new Semaphore(0, 1);
-        //    Task.Run(() =>
-        //    {
-        //        keyInstance.RedirectActivationToAsync(args).AsTask().Wait();
-        //        redirectSemaphore.Release();
-        //    });
-        //    redirectSemaphore.WaitOne();
-        //}
-
         private static void OnActivated(object sender, AppActivationArguments args)
         {
             ExtendedActivationKind kind = args.Kind;
