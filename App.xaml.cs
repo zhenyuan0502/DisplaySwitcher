@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.UI;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -38,24 +40,11 @@ namespace DisplaySwitcher
 
         public string LaunchParam { get; set; }
 
-        /// <summary>
-        /// Invoked when the application is launched.
-        /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
-        protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        private async Task CreateJumpList()
         {
-            LaunchParam = args.Arguments;
-            // Show message log in the console
-            Console.WriteLine($"LaunchParam: {LaunchParam}");
-
-            m_window = new MainWindow();
-            m_window.Activate();
-            m_window.AppWindow.Resize(new (480, 800));
-            m_window.AppWindow.SetIcon("Assets/TitlebarLogo.png");
-
             var jumpList = await JumpList.LoadCurrentAsync();
-            jumpList.Items.Clear();
-            await jumpList.SaveAsync();
+            //jumpList.Items.Clear();
+            //await jumpList.SaveAsync();
 
             var list = new List<string>() { "First", "Second", "Duplicate", "Extend" };
             bool isChanged = false;
@@ -74,6 +63,21 @@ namespace DisplaySwitcher
 
             if (isChanged)
                 await jumpList.SaveAsync();
+        }
+
+        /// <summary>
+        /// Invoked when the application is launched.
+        /// </summary>
+        /// <param name="e">Details about the launch request and process.</param>
+        protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs e)
+        {
+            if (e.UWPLaunchActivatedEventArgs.PreviousExecutionState != ApplicationExecutionState.Running) //Check if is there any instance of the App is already running
+                base.OnLaunched(e);
+
+            m_window = new MainWindow();
+            m_window.Activate();
+
+            await CreateJumpList();
         }
 
         private Window m_window;

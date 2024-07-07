@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <defineconstants>DISABLE_XAML_GENERATED_MAIN</defineconstants>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
@@ -17,6 +18,7 @@
     <Content Remove="Assets\TitlebarLogo.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\TitlebarLogo.ico" />
     <None Remove="Assets\TitlebarLogo.png" />
   </ItemGroup>
 
@@ -26,7 +28,6 @@
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
 

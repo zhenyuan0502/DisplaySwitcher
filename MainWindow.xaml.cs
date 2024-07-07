@@ -1,3 +1,5 @@
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -16,10 +18,11 @@ using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.Shell;
 using Windows.UI.StartScreen;
-
+using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -31,12 +34,76 @@ namespace DisplaySwitcher
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        private string m_windowsPath = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
-        private string m_displaySwitchPath = string.Empty;
+        AppWindow m_appWindow;
         public MainWindow()
         {
             this.InitializeComponent();
-            m_displaySwitchPath = Path.Combine(m_windowsPath, "System32", "DisplaySwitch");
+
+            if (AppWindowTitleBar.IsCustomizationSupported())
+            {
+                m_appWindow = GetAppWindowForCurrentWindow();
+                m_appWindow.SetIcon(@"Assets\TitlebarLogo.ico");
+                m_appWindow.Resize(new(480, 480));
+
+            }
+        }
+
+        private void SwitchPresenter_CompOverlay(object sender, RoutedEventArgs e)
+        {
+            m_appWindow.SetPresenter(AppWindowPresenterKind.CompactOverlay);
+        }
+
+        private void SwitchPresenter_OverLapped(object sender, RoutedEventArgs e)
+        {
+            m_appWindow.SetPresenter(AppWindowPresenterKind.Overlapped);
+        }
+
+        private void SwitchPresenter_Fullscreen(object sender, RoutedEventArgs e)
+        {
+            m_appWindow.SetPresenter(AppWindowPresenterKind.FullScreen);
+        }
+
+        private AppWindow GetAppWindowForCurrentWindow()
+        {
+            IntPtr hWnd = WindowNative.GetWindowHandle(this);
+            WindowId myWndId = Win32Interop.GetWindowIdFromWindow(hWnd);
+            return AppWindow.GetFromWindowId(myWndId);
+        }
+
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+            if (toggleSwitch != null)
+            {
+                if (toggleSwitch.IsOn == true)
+                {
+                    if (this.Content is FrameworkElement frameworkElement)
+                    {
+                        frameworkElement.RequestedTheme = ElementTheme.Dark;
+                    }
+                }
+                else
+                {
+                    if (this.Content is FrameworkElement frameworkElement)
+                    {
+                        frameworkElement.RequestedTheme = ElementTheme.Light;
+                    }
+                }
+            }
+
+            ApplicationData.Current.LocalSettings.Values["themeSetting"] = ((ToggleSwitch)sender).IsOn ? 0 : 1;
+        }
+
+        private void ToggleSwitch_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (ApplicationData.Current.LocalSettings.Values.TryGetValue("themeSetting", out object themeSetting) && (int)themeSetting == 0)
+            {
+                darkSwitch.IsOn = true;
+            }
+            else
+            {
+                darkSwitch.IsOn = false;
+            }
         }
 
         private async void PinTaskBar_Click(object sender, RoutedEventArgs e)
@@ -48,50 +115,26 @@ namespace DisplaySwitcher
             //pinTaskBar.IsEnabled = !isPinned;
             //pinTaskBar.IsEnabled = true;
 
-            // Get the app's jump list.
-            var jumpList = await Windows.UI.StartScreen.JumpList.LoadCurrentAsync();
-
-            // Set the system to autogenerate a Frequent group for the app jump list.
-            // Alternatively, this property could be set to JumpListSystemGroupKind.Recent to autogenerate a Recent group.
-            jumpList.SystemGroupKind = Windows.UI.StartScreen.JumpListSystemGroupKind.Frequent;
-
-            // No changes were made to the jump list Items property, so any custom tasks and groups remain intact.
-            await jumpList.SaveAsync();
-        }
-
-        private void StartScreen(int number)
-        {
-            Process process = new Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = $"/c {m_displaySwitchPath} {number}";
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardInput = true;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError = true;
-            process.Start();
-            process.WaitForExit();
-            process.Close();
         }
 
         private void FirstScreen_Click(object sender, RoutedEventArgs e)
         {
-            StartScreen(1);
+            DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["First"]);
         }
 
         private void SecondScreen_Click(object sender, RoutedEventArgs e)
         {
-            StartScreen(4);
+            DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["Second"]);
         }
 
         private void DuplicateScreen_Click(object sender, RoutedEventArgs e)
         {
-            StartScreen(2);
+            DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["Duplicate"]);
         }
 
         private void ExtendScreen_Click(object sender, RoutedEventArgs e)
         {
-            StartScreen(3);
+            DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["Extend"]);
         }
 
     }
