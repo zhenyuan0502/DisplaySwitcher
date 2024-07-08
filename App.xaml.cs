@@ -1,4 +1,5 @@
-﻿using Microsoft.UI;
+﻿using H.NotifyIcon;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -26,8 +27,6 @@ using Windows.UI.StartScreen;
 
 namespace DisplaySwitcher
 {
-   
-
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
@@ -42,7 +41,9 @@ namespace DisplaySwitcher
             this.InitializeComponent();
         }
 
-        public string LaunchParam { get; set; }
+        public static MainWindow MainWindow { get; set; } = new();
+        public static bool HandleClosedEvents { get; set; } = true;
+
 
         private async Task CreateJumpList()
         {
@@ -78,13 +79,20 @@ namespace DisplaySwitcher
             if (e.UWPLaunchActivatedEventArgs.PreviousExecutionState != ApplicationExecutionState.Running) //Check if is there any instance of the App is already running
                 base.OnLaunched(e);
 
-            m_window = new MainWindow();
-            m_window.Activate();
+            MainWindow.Closed += (sender, args) =>
+            {
+                if (HandleClosedEvents)
+                {
+                    args.Handled = true;
+                    MainWindow.Hide();
+                }
+            };
+
+            MainWindow.Activate();
 
             await CreateJumpList();
         }
 
-        private Window m_window;
 
         public static TEnum GetEnum<TEnum>(string text) where TEnum : struct
         {

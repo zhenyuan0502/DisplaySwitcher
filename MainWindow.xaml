@@ -6,9 +6,11 @@
     xmlns:local="using:DisplaySwitcher"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:DisplaySwitcher.Views"
     mc:Ignorable="d">
 
-        <StackPanel >
+    <StackPanel >
+
         <Grid x:Name="AppTitleBar" Height="32" Background="Transparent" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
@@ -44,10 +46,10 @@
 
 
             <ComboBox 
-                        Grid.Column="0" Grid.Row="0"
-                      x:Name="cbBackdropTheme" PlaceholderText="Pick a Theme" Width="200"
-                      SelectedItem="{x:Bind CurrentBackdropTheme, Mode=TwoWay}"
-                        ItemsSource="{x:Bind BackdropThemes}" 
+                Grid.Column="0" Grid.Row="0"
+                x:Name="cbBackdropTheme" PlaceholderText="Pick a Theme" Width="200"
+                SelectedItem="{x:Bind CurrentBackdropTheme, Mode=TwoWay}"
+                ItemsSource="{x:Bind BackdropThemes}" 
                       >
                 <ComboBox.Resources>
                     <local:EnumToDisplayNameConverter x:Key="EnumToDisplayNameConverter" />
@@ -58,7 +60,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            
+
             <TextBlock 
                 x:Name="tbChangeStatus"
                 Margin="16,0,0,0"
@@ -74,7 +76,7 @@
                 Toggled="ToggleSwitch_Toggled" Loaded="ToggleSwitch_Loaded"/>
         </Grid>
 
-      
+
         <Grid x:Name="Control1" Grid.Row="1" ColumnSpacing="30" RowSpacing="12"
               Height="Auto"
                VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -94,7 +96,7 @@
                     <Setter Property="HorizontalAlignment" Value="Stretch" />
                     <Setter Property="VerticalAlignment" Value="Stretch" />
                     <Setter Property="CornerRadius" Value="5" />
-                    <Setter Property="FontSize" Value="24" />
+                    <Setter Property="FontSize" Value="16" />
                 </Style>
             </Grid.Resources>
             <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Please Pin App to TaskBar for using in different monitors" />
@@ -104,6 +106,7 @@
             <Button Grid.Row="2" Grid.Column="1"  Click="ExtendScreen_Click" Content="Extend" />
 
         </Grid>
+        <views:TrayIconView x:Name="TrayIconView" />
 
     </StackPanel>
 

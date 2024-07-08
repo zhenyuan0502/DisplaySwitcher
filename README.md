@@ -21,7 +21,8 @@ This project is a display switcher that allows you to easily switch between diff
 - Support multiple backdrop mode: Mica/Acrylic
 - Jumplist selection for quick switching
 - [WIP] Supports multiple displays
-- [WIP] Windows background service and show icon on system tray
+- [WIP] Windows background service
+- Tray Icon ![support](https://github.com/HavenDV/H.NotifyIcon/?tab=readme-ov-file#winui-context-menu)
 
 ## Installation
 

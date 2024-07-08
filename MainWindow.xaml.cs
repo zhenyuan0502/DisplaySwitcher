@@ -141,7 +141,7 @@ namespace DisplaySwitcher
             {
                 m_appWindow = WindowHelper.GetAppWindow(this);
                 m_appWindow.SetIcon(@"Assets\TitlebarLogo.ico");
-                m_appWindow.Resize(new(480, 280));
+                m_appWindow.Resize(new(520, 340));
 
                 //https://learn.microsoft.com/en-us/windows/apps/develop/title-bar
                 var titleBar = m_appWindow.TitleBar;
@@ -422,24 +422,15 @@ namespace DisplaySwitcher
         }
 
         private void FirstScreen_Click(object sender, RoutedEventArgs e)
-        {
-            DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["First"]);
-        }
+            => DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["First"]);
 
         private void SecondScreen_Click(object sender, RoutedEventArgs e)
-        {
-            DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["Second"]);
-        }
+            => DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["Second"]);
 
         private void DuplicateScreen_Click(object sender, RoutedEventArgs e)
-        {
-            DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["Duplicate"]);
-        }
+           => DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["Duplicate"]);
 
         private void ExtendScreen_Click(object sender, RoutedEventArgs e)
-        {
-            DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["Extend"]);
-        }
-
+           => DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["Extend"]);
     }
 }
