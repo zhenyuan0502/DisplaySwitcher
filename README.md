@@ -22,7 +22,7 @@ This project is a display switcher that allows you to easily switch between diff
 - Jumplist selection for quick switching
 - [WIP] Supports multiple displays
 - [WIP] Windows background service
-- Tray Icon ![support](https://github.com/HavenDV/H.NotifyIcon/?tab=readme-ov-file#winui-context-menu)
+- [Tray Icon](https://github.com/HavenDV/H.NotifyIcon/?tab=readme-ov-file#winui-context-menu)
 
 ![Tray Icon](Assets/Screenshots/Screenshot_4.png)
 
