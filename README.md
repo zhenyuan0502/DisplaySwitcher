@@ -23,7 +23,8 @@ This project is a display switcher that allows you to easily switch between diff
 - [WIP] Supports multiple displays
 - [WIP] Windows background service
 - Tray Icon ![support](https://github.com/HavenDV/H.NotifyIcon/?tab=readme-ov-file#winui-context-menu)
-![alt text](Assets/Screenshots/Screenshot_4.png)
+
+![Tray Icon](Assets/Screenshots/Screenshot_4.png)
 
 
 ## Installation
