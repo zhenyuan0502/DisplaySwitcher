@@ -11,7 +11,7 @@ public sealed partial class TrayIconView : UserControl
 {
     [ObservableProperty]
     private bool _isWindowVisible;
-    
+
     public TrayIconView()
     {
         InitializeComponent();
@@ -45,7 +45,7 @@ public sealed partial class TrayIconView : UserControl
         App.MainWindow?.Close();
     }
 
-    private void First_Click(object sender, RoutedEventArgs e) 
+    private void First_Click(object sender, RoutedEventArgs e)
         => DisplaySwitcherFunction.StartScreen(DisplaySwitcherFunction.SCREEN_OPTION["First"]);
 
     private void Second_Click(object sender, RoutedEventArgs e)

@@ -1,14 +1,10 @@
-﻿using Microsoft.UI.Xaml.Media;
+﻿using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
-using Microsoft.UI;
+using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Storage;
 using WinRT.Interop;
-using Microsoft.UI.Windowing;
 
 namespace DisplaySwitcher.Helper
 {
@@ -26,7 +22,8 @@ namespace DisplaySwitcher.Helper
 
         static public void TrackWindow(Window window)
         {
-            window.Closed += (sender, args) => {
+            window.Closed += (sender, args) =>
+            {
                 _activeWindows.Remove(window);
             };
             _activeWindows.Add(window);
@@ -72,6 +69,6 @@ namespace DisplaySwitcher.Helper
         static public List<Window> ActiveWindows { get { return _activeWindows; } }
 
         static private List<Window> _activeWindows = new List<Window>();
-     
+
     }
 }

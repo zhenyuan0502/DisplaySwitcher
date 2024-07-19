@@ -8,11 +8,11 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="6ed443f9-d39c-45ee-b743-6be9610d50d6"
-    Publisher="CN=zhenyuan0502"
-    Version="1.0.0.0" />
+    Name="10099zhenyuan0502.22777CA0E0C9A"
+    Publisher="CN=19FD170D-CFEB-42BB-AF9B-20CA8BACB2D9"
+    Version="1.0.7.0" />
 
-  <mp:PhoneIdentity PhoneProductId="6ed443f9-d39c-45ee-b743-6be9610d50d6" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="98e817b4-9755-445f-85a1-2b39368e430a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Display Switcher</DisplayName>
